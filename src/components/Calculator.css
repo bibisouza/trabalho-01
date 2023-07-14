@@ -1,0 +1,50 @@
+@font-face {
+    font-family: ELEPHNT;
+    src: url("C:\Users\souza\Downloads\ELEPHNT.TTF");
+}
+
+button {
+    width: 3em;
+    height: 3em;
+    font-family: ELEPHNT;
+    font-size: 1.5em;
+    color: #A69C94;
+    background-color: #D9D4CC;
+    border: none;
+    border-radius: 2em;
+    margin: 0.3em;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.wrapper {
+    background-color: #A69C94;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.colour {
+    background-color: #C6F266;
+    color: #595438;
+}
+
+.colouralt {
+    background-color: #595438;
+    color: #D9D4CC;
+}
+
+#btEquals {
+    width: 6.6em;
+    border-radius: 2em;
+}
+
+.result {
+    color: #595438;
+    font-family: ELEPHNT;
+    display: flex;
+    justify-content: right;
+    margin-right: 0.5em;
+    font-size: 3.5em;
+}
