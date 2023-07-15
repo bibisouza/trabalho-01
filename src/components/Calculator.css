@@ -48,3 +48,8 @@ button:hover {
     margin-right: 0.5em;
     font-size: 3.5em;
 }
+
+.memo {
+    color: #A69C94;
+    background-color: #D9D4CC;
+}

@@ -6,15 +6,16 @@ import { Box } from '@mui/system';
 import { useState } from "react";
 
 export default function Calculator() {
-        const [num,setNum] = useState(0);
-        const [mem,setMem] = useState(0);
-        const [calc,setCalc] = useState();
+        const [num,setNum] = useState("");
+        const [mem,setMem] = useState("");
+        const [calc,setCalc] = useState("");
         
         function inputNum(e) {
             console.log(e.target.value);
             var input = e.target.value
-            if (num == 0) {
+            if (num === 0 || calc) {
                 setNum(input);
+                setCalc(null);
             }else{
                 setNum(num + input);
             }
@@ -48,12 +49,41 @@ export default function Calculator() {
                 setNum(parseFloat(mem) / parseFloat(num));
             } else if (calc==="X") {
                 setNum(parseFloat(mem) * parseFloat(num));
-            } else if (calc==="–") {
+            } else if (calc==="-") {
                 setNum(parseFloat(mem) - parseFloat(num));
             } else if (calc==="+") {
                 setNum(parseFloat(mem) + parseFloat(num));
+            }
         }
-    }
+    
+
+        function sumMemory() {
+            if (calc === "+") {
+                setMem(mem + parseFloat(num));
+            } else {
+                setMem(parseFloat(num));
+                setCalc("+");
+            }
+            setNum(0);
+        }
+
+        function subMemory() {
+            if (calc === "-") {
+                setMem(mem - parseFloat(num));
+            } else {
+                setMem(parseFloat(num));
+                setCalc("-");
+            }
+            setNum(0);
+        }
+
+        function recallMemory() {
+            setMem(mem);
+        }
+
+        function clearMemory() {
+            setMem(0);
+        }
 
     return (
         <div>
@@ -63,6 +93,10 @@ export default function Calculator() {
                 <Box m={12} />
                         <h1 className="result">{num}</h1>
 
+                    <button className="memo" onClick={sumMemory} value={"M+"}>M+</button>
+                    <button className="memo" onClick={subMemory} value={"M-"}>M-</button>
+                    <button className="memo" onClick={recallMemory} value={"MR"}>MR</button>
+                    <button className="colour" onClick={clearMemory} value={"MC"}>MC</button>
                     <button onClick={clear}>AC</button>
                     <button onClick={signal}>+/–</button>
                     <button onClick={perctg}>%</button>
