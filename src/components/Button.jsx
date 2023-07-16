@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function Calculator() {
         const [num,setNum] = useState("");
         const [mem,setMem] = useState("");
-        const [calc,setCalc] = useState("");
+        const [calc,setCalc] = useState(null);
         
         function inputNum(e) {
             console.log(e.target.value);
