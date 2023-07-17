@@ -8,71 +8,70 @@ import { useState } from "react";
 export default function Calculator() {
         const [num,setNum] = useState("");
         const [mem,setMem] = useState("");
-        const [calc,setCalc] = useState(null);
+        const [operator,setOperator] = useState(null);
+        const [previous, setPrevious] = useState("");
         
         function inputNum(e) {
-            console.log(e.target.value);
-            var input = e.target.value
-            if (num === 0 || calc) {
+            const input = e.target.value
+            if (num === "0" || operator) {
                 setNum(input);
-                setCalc(null);
+                setOperator(null);
             }else{
                 setNum(num + input);
             }
         }
 
-        function clear(e) {
-            setNum(0);
+        function clear() {
+            setNum("0");
         }
 
         function perctg() {
-            setNum(num / 100);
+            setNum(parseFloat(num) / 100);
         }
 
         function signal() {
-            if (num>0) {
-                setNum(-num);
-            }else{
-                setNum(num * -1);
-            }
+            setNum((previous) => String(parseFloat(previous) * -1));
         }
 
         function handler(e) {
-            var op = e.target.value;
-            setCalc(op);
-            setMem(num);
-            setNum(0);
+            const op = e.target.value;
+            setOperator(op);
+            setPrevious(num);
+            setNum("0");
         }
 
-        function calculate() {
-            if (calc==="/") {
-                setNum(parseFloat(mem) / parseFloat(num));
-            } else if (calc==="X") {
-                setNum(parseFloat(mem) * parseFloat(num));
-            } else if (calc==="-") {
-                setNum(parseFloat(mem) - parseFloat(num));
-            } else if (calc==="+") {
-                setNum(parseFloat(mem) + parseFloat(num));
+        function calculate(e) {
+            if (operator==="/") {
+                setNum(parseFloat(previous) / parseFloat(num));
+            } else if (operator==="X") {
+                setNum(parseFloat(previous) * parseFloat(num));
+            } else if (operator==="-") {
+                setNum(parseFloat(previous) - parseFloat(num));
+            } else if (operator==="+") {
+                setNum(parseFloat(previous) + parseFloat(num));
             }
+
+            setOperator(null);
+            setPrevious("");
         }
     
 
         function sumMemory() {
-            if (calc === "+") {
+            if (operator === "+") {
                 setMem(mem + parseFloat(num));
             } else {
                 setMem(parseFloat(num));
-                setCalc("+");
+                setOperator("+");
             }
             setNum(0);
         }
 
         function subMemory() {
-            if (calc === "-") {
+            if (operator === "-") {
                 setMem(mem - parseFloat(num));
             } else {
                 setMem(parseFloat(num));
-                setCalc("-");
+                setOperator("-");
             }
             setNum(0);
         }
